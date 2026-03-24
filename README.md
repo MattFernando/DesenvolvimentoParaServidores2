@@ -1,3 +1,2 @@
-# DesenvolvimentoParaServidores2
-material das aulas de servidores, projeto feito por Matheus Fernando
-Esse projeto foi feito no 5º semestre da Fatec de São Roque (primeiro semestre de 2026)
+# FatecSRDSII202501
+Repositório para arquivos das aulas de Desenvolvimento para Servidores II da Fatec de São Roque
