@@ -53,7 +53,7 @@ public function setEstatus($estatusFront){
     $this->TipoUsuario = $estatusFront;
 }
 
-public function Inserir(){
+public function inserir(){
     //Atributos para controlar o status de nosso metodo
     $erros = [];
     $sucesso =false;
@@ -73,10 +73,10 @@ public function Inserir(){
             $erros[] = ['codigo' => 99, 'msg' => 'Campos incexistentes ou incorretos'];
         }else{
             //Valida campos e os tipos de dado (helper)
-            $retornoCodigo = VerificaTipo($resultado->codigo, 'int' ,true);
-            $retornoDescricao = VerificaTipo($resultado->descricao, 'string' , true);
-            $retornoAndar = VerificaTipo($resultado->andar, 'int' , true);
-            $retornoCapacidade = VerificaTipo($resultado->capacidade,'int' ,true);
+            $retornoCodigo = VerificaTipo($resultado -> codigo, 'int' ,true);
+            $retornoDescricao = VerificaTipo($resultado -> descricao, 'string' , true);
+            $retornoAndar = VerificaTipo($resultado -> andar, 'int' , true);
+            $retornoCapacidade = VerificaTipo($resultado -> capacidade,'int' ,true);
 
             if ($retornoCodigo['CodigoHelper'] != 0){
                 $erros[] = ['codigo' => $retornoCodigo['CodigoHelper'],
@@ -105,7 +105,7 @@ public function Inserir(){
                 $this->setCapacidade($resultado->capacidade);
 
                 $this->load->model('M_sala');
-                $resBanco = $this->M_sala->inserir(
+                $resBanco = $this->M_sala->Inserir(
                     $this->getCodigo(),
                     $this->getDescricao(),
                     $this->getAndar(),
