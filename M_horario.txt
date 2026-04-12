@@ -1,0 +1,177 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+class M_horario extends CI_Model
+{
+    /*
+    Losta de erros:
+    0 - Errp e exceção
+    1- Operação realizada com sucesso no banco de dados
+    8 - Houve problema na inserção, atualização, consulta ou exclusão no banco de dados
+    9 - Horario desativado no sistema
+    10 - Horario ja existe no sistema
+    11 - Horario nao encontrado pelo método publico
+    98 - Método auxiliar de consulta nao trouxe dados
+    */
+
+    //Metodo Privado auxiliar da classe para consultar o horário de acordo com os parametros passados
+    private function ConsultarHorario($codigo, $horaInicial, $horaFinal)
+    {
+        try {
+            //query para consultar dados de acordo com parametros passados
+            if ($codigo != '') {
+                $sql = "select * from tbl_horario where codigo = $codigo ";
+            } else {
+                $sql = "select * from tbl_horario where hora_ini = '$horaInicial' and hora_fim = '$horaFinal'";
+            }
+            $retornoHorario = $this->db->query($sql);
+            //Verifica se a consulta retornou dados
+            if ($retornoHorario->num_rows() > 0) {
+                $linha = $retornoHorario->row();
+                if (trim($linha->estatus) == 'D') {
+                    $dados = array('codigo' => 9, 'msg' => 'Horario desativado no sistema, se precisar, fale com algum administrador');
+                } else {
+                    $dados = array('codigo' => 10, 'msg' => 'Horario já cadastrado no sistema');
+                }
+            } else {
+                $dados = array('codigo' => 98, 'msg' => 'Horario não encontrado');
+            }
+        } catch (Exception $e) {
+            $dados = array('codigo' => 0, 'msg' => 'ATENÇÃO: O seguinte erro aconteceu: ' . $e->getMessage());
+        }
+        //Envia o array ($dados) com as informações tratadas
+        return $dados;
+    }
+
+
+
+
+    public function Inserir($descricao, $horaInicial, $horaFinal)
+    {
+        try {
+            //Verifica se o horário já existe no sistema
+            $retornoConsulta = $this->ConsultarHorario('', $horaInicial, $horaFinal);
+            if ($retornoConsulta['codigo'] != 9 && $retornoConsulta['codigo'] != 10) {
+                //Montando query para inserir os dados
+                $this->db->query("insert into tbl_horario(descricao,hora_ini, hora_fim) values
+                                                ('$descricao', '$horaInicial', '$horaFinal')");
+
+                //Verificando se ocorreu tudo certo na inserção
+                if ($this->db->affected_rows() > 0) {
+                    $dados = array('codigo' => 1, 'msg' => 'Horario inserido com sucesso');
+                } else {
+                    $dados = array('codigo' => 8, 'msg' => 'Houve um problema na inserção do horário');
+                }
+            } else {
+                $dados = array('codigo' => $retornoConsulta['codigo'], 'msg' => $retornoConsulta['msg']);
+            }
+        } catch (Exception $e) {
+            $dados = array('codigo' => 0, 'msg' => 'ATENÇÃO: O seguinte erro aconteceu: ' . $e->getMessage());
+        }
+        //Envia o array ($dados) com as informações tratadas
+        return $dados;
+    }
+
+    public function Consultar($codigo, $descricao, $horaInicial, $horaFinal)
+    {
+        try {
+            //Query para consultar os dados de acordo com os parametros passados
+            $sql = "select * from tbl_horario where estatus = '' ";
+            if (trim($codigo) != '') {
+                $sql = $sql . " and codigo = $codigo ";
+            }
+            if (trim($descricao) != '') {
+                $sql = $sql . " and descricao like '%$descricao%' ";
+            }
+            if (trim($horaInicial) != '') {
+                $sql = $sql . " and hora_ini = '$horaInicial' ";
+            }
+            if (trim($horaFinal) != '') {
+                $sql = $sql . " and hora_fim = '$horaFinal' ";
+            }
+
+            $sql = $sql . " order by codigo";
+            $retorno = $this->db->query($sql);
+
+            //Verificar se a consulta ocorreu com sucesso
+            if ($retorno->num_rows() > 0) {
+                $dados = array(
+                    'codigo' => 1,
+                    'msg' => 'Consulta realizada com sucesso',
+                    'dados' => $retorno->result()
+                );
+            } else {
+                $dados = array('codigo' => 11, 'msg' => 'Horario não encontrado');
+            }
+        } catch (Exception $e) {
+            $dados = array('codigo' => 0, 'msg' => 'ATENÇÃO: O seguinte erro aconteceu: ' . $e->getMessage());
+        }
+        //Envia o array ($dados) com as informações tratadas
+        return $dados;
+    }
+
+    public function Alterar($codigo, $descricao, $horaInicial, $horaFinal)
+    {
+        try {
+            //Verifica se o horário já existe no sistema
+            $retornoConsulta = $this->Consultar($codigo, '', '', '');
+
+            if ($retornoConsulta['codigo'] == 1) {
+                //Montando query para atualizar os dados
+                $query = "update tbl_horario set ";
+
+                //comparações
+                if ($descricao != '') {
+                    $query = $query . "descricao = '$descricao', ";
+                }
+                if ($horaInicial != '') {
+                    $query = $query . "hora_ini = '$horaInicial', ";
+                }
+                if ($horaFinal != '') {
+                    $query = $query . "hora_fim = '$horaFinal', ";
+                }
+                // Remover a última vírgula e espaço
+                $queryFinal = rtrim($query, ', ') . " where codigo = $codigo";
+
+                //execução da query
+                $this->db->query($queryFinal);
+
+                //Verificando se ocorreu tudo certo na atualização
+                if ($this->db->affected_rows() > 0) {
+                    $dados = array('codigo' => 1, 'msg' => 'Horario atualizado com sucesso');
+                } else {
+                    $dados = array('codigo' => 8, 'msg' => 'Houve um problema na atualização do horário');
+                }
+            } else {
+                $dados = array('codigo' => $retornoConsulta['codigo'], 'msg' => $retornoConsulta['msg']);
+            }
+        } catch (Exception $e) {
+            $dados = array('codigo' => 0, 'msg' => 'ATENÇÃO: O seguinte erro aconteceu: ' . $e->getMessage());
+        }
+        //Envia o array ($dados) com as informações tratadas
+        return $dados;
+    }
+
+    public function Desativar($codigo)
+    {
+        try {
+            //Verifica se o horário já existe
+            $retornoConsulta = $this->ConsultarHorario($codigo, '', '');
+            if ($retornoConsulta['codigo'] == 10) {
+                //Montando query para desativar o horário
+                $this->db->query("update tbl_horario set estatus = 'D' where codigo = $codigo");
+                //Verificando se ocorreu tudo certo na desativação
+                if ($this->db->affected_rows() > 0) {
+                    $dados = array('codigo' => 1, 'msg' => 'Horario desativado com sucesso');
+                } else {
+                    $dados = array('codigo' => 8, 'msg' => 'Houve um problema na desativação do horário');
+                }
+            } else {
+                $dados = array('codigo' => $retornoConsulta['codigo'], 'msg' => $retornoConsulta['msg']);
+            }
+        } catch (Exception $e) {
+            $dados = array('codigo' => 0, 'msg' => 'ATENÇÃO: O seguinte erro aconteceu: ' . $e->getMessage());
+        }
+        //Envia o array ($dados) com as informações tratadas
+        return $dados;
+    }
+}
