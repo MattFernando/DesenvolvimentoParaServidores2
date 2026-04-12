@@ -4,9 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
-function VerificaParam($atributo, $lista){
-    foreach($lista as $key => $value){
-        if (array_key_exists($key, get_object_vars($atributo))){
+function VerificaParam($atributo, $lista)
+{
+    foreach ($lista as $key => $value) {
+        if (array_key_exists($key, get_object_vars($atributo))) {
             $estatus = 1;
         } else {
             $estatus = 0;
@@ -14,7 +15,7 @@ function VerificaParam($atributo, $lista){
         }
     }
 
-    if (count(get_object_vars($atributo)) != count($lista)){
+    if (count(get_object_vars($atributo)) != count($lista)) {
         $estatus = 0;
     }
 
@@ -22,52 +23,112 @@ function VerificaParam($atributo, $lista){
 }
 
 
-function VerificaTipo($valor, $tipo, $tamanhoZero = true){
-    if (is_null($valor) || $valor === ''){
-        return array('CodigoHelper' => 3, 'msg'=>'Conteudo Zerado');
+function VerificaTipo($valor, $tipo, $tamanhoZero = true)
+{
+    if (is_null($valor) || $valor === '') {
+        return array('CodigoHelper' => 2, 'msg' => 'Conteudo Zerado');
     }
 
-    if ($tamanhoZero && ($valor === 0 || $valor === '0')){
-        return array('CodigoHelper' => 4, 'msg' => 'Conteudo Zerado');
+    if ($tamanhoZero && ($valor === 0 || $valor === '0')) {
+        return array('CodigoHelper' => 3, 'msg' => 'Conteudo Zerado');
     }
 
-    switch ($tipo){
+    switch ($tipo) {
         case 'int':
-            if (filter_var($valor, FILTER_VALIDATE_INT)=== false){
-                return array('CodigoHelper' => 5, 'msg' => 'Conteudo não inteiro');
+            //verificação para tipos inteiros, aceita até '123' em string ou 123 em numero normal
+            if (filter_var($valor, FILTER_VALIDATE_INT) === false) {
+                return array('CodigoHelper' => 4, 'msg' => 'Conteudo não inteiro');
             }
             break;
 
+        case 'string':
+            //Verificação de string
+            if (!is_string($valor) || trim($valor) === '') {
+                return array('CodigoHelper' => 5, 'msg' => 'Conteudo não é um texto');
+            }
+            break;
+        case 'date':
+            //verificação de Data, dar uma olhada no conceito mais tarde
+            if (!preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $valor, $match)) {
+                return array('CodigoHelper' => 6, 'msg' => 'Data em formato invalido');
+            } else {
+                $d = DateTime::createFromFormat('Y-m-d', $valor);
+                if (($d->format('Y-m-d') === $valor) == false) {
+                    return array('CodigoHelper' => 6, 'msg' => 'Data inválida');
+                }
+            }
+            break;
+        case 'hora':
+            if (!preg_match('/^(?:[01]\d|2[0-3]):[0-5]\d$/', $valor)) {
+                return array('CodigoHelper' => 7, 'msg' => 'Hora em formato invalido');
+            }
+            break;
+        default:
+            return array('CodigoHelper' => 0, 'msg' => 'Tipo de dado não definido');
+    }
+
+    return array('CodigoHelper' => 0, 'msg' => 'Validação Correta!');;
+}
+function VerificaConsulta($valor, $tipo)
+{
+    if ($valor != '') {
+        switch ($tipo) {
+            case 'int':
+                //verificação para tipos inteiros, aceita até '123' em string ou 123 em numero normal
+                if (filter_var($valor, FILTER_VALIDATE_INT) === false) {
+                    return array('CodigoHelper' => 4, 'msg' => 'Conteudo não inteiro');
+                }
+                break;
+
             case 'string':
-                if (!is_string($valor) || trim($valor) === ''){
-                    return array ('CodigoHelper' => 6, 'msg' => 'Conteudo não é um texto');
+                //Verificação de string
+                if (!is_string($valor) || trim($valor) === '') {
+                    return array('CodigoHelper' => 5, 'msg' => 'Conteudo não é um texto');
                 }
                 break;
             case 'date':
-                if(!preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $valor, $match)){
-                    return array('CodigoHelper' => 7, 'msg' => 'Data em formato invalido');
+                //verificação de Data, dar uma olhada no conceito mais tarde
+                if (!preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $valor, $match)) {
+                    return array('CodigoHelper' => 6, 'msg' => 'Data em formato invalido');
                 } else {
-                    $d = DateTime::createFromFormat ('Y-m-d', $valor);
-                    if (($d -> format('Y-m-d') === $valor) == false){
-                        return array('CodigoHelper' => 8, 'msg' => 'Data inválida');
+                    $d = DateTime::createFromFormat('Y-m-d', $valor);
+                    if (($d->format('Y-m-d') === $valor) == false) {
+                        return array('CodigoHelper' => 6, 'msg' => 'Data inválida');
                     }
                 }
                 break;
-                case 'hora':
-                    if (!preg_match('/^(?:[01]\d|2[0-3]):[0-5]\d$/', $valor)){
-                        return array('CodigoHelper' => 7, 'msg' => 'Hora em formato invalido');
-                    }
-                    break;
-                    default:
-                    return array('CodigoHelper' => 0, 'msg' => 'Tipo de dado não definido');
+            case 'hora':
+                if (!preg_match('/^(?:[01]\d|2[0-3]):[0-5]\d$/', $valor)) {
+                    return array('CodigoHelper' => 7, 'msg' => 'Hora em formato invalido');
+                }
+                break;
+            default:
+                return array('CodigoHelper' => 0, 'msg' => 'Tipo de dado não definido');
+        }
     }
-
-    return array ('CodigoHelper' => 0, 'msg' => 'Validação Correta!');;
-
-
+    return array('CodigoHelper' => 0, 'msg' => 'Validação Correta!');;
 }
 
+function VerificarDataHora($ValorInicial, $ValorFinal, $Tipo)
+{
+    //Transformar string em hora ou data para comparação
+    $ValorInicial = strtotime($ValorInicial);
+    $ValorFinal = strtotime($ValorFinal);
 
-
-?>
-
+    if ($ValorInicial != '' && $ValorFinal != '') {
+        if ($ValorInicial > $ValorFinal) {
+            switch ($Tipo) {
+                case 'hora':
+                    return array('CodigoHelper' => 13, 'msg' => 'Hora inicial não pode ser maior que a hora final');
+                    break;
+                case 'date':
+                    return array('CodigoHelper' => 14, 'msg' => 'Data inicial não pode ser maior que a data final');
+                    break;
+                default:
+                    return array('CodigoHelper' => 97, 'msg' => 'Tipo de verificação não definido');
+            }
+        }
+    }
+    //retorno caso tudo esteja correto
+    return array('CodigoHelper' => 0, 'msg' => 'Validação Correta!');
+}
