@@ -1,0 +1,870 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Testes DS2 Matheus
+meta:
+  id: wrk_a6f8c271733a40f78031aa3649cbe485
+  created: 1776012284277
+  modified: 1776028582550
+  description: ""
+collection:
+  - name: Sala
+    meta:
+      id: fld_97231c93c775456d8ff17c80f629f936
+      created: 1776012299446
+      modified: 1779158668210
+      sortKey: -1776012299446
+      description: ""
+    children:
+      - url: localhost/ds2mf/sala/Inserir
+        name: Inserir
+        meta:
+          id: req_2408248268bf43b5a9d1a939dd585f92
+          created: 1776012310373
+          modified: 1776018630216
+          isPrivate: false
+          description: ""
+          sortKey: -1776012310373
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "2",
+            	"descricao": "Teste Desativar",
+            	"andar": "13",
+            	"capacidade": "99"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/sala/Consultar
+        name: Consultar
+        meta:
+          id: req_3eaafe53bbc544cd97e478b20610f841
+          created: 1776012515117
+          modified: 1776018487597
+          isPrivate: false
+          description: ""
+          sortKey: -1776012515117
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "",
+            	"descricao": "",
+            	"andar": "",
+            	"capacidade": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/sala/Alterar
+        name: Alterar
+        meta:
+          id: req_78febf438dc1401aabaea7f5f6e6252a
+          created: 1776018424393
+          modified: 1776026789649
+          isPrivate: false
+          description: ""
+          sortKey: -1776018424393
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "1",
+            	"descricao": "teste4",
+            	"andar": "1",
+            	"capacidade": "as"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/sala/Desativar
+        name: Desativar
+        meta:
+          id: req_ffd5bc572f104e5fb96087134e0c2d05
+          created: 1776018567326
+          modified: 1779164586695
+          isPrivate: false
+          description: ""
+          sortKey: -1776018567326
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Horarios
+    meta:
+      id: fld_d132de7f7f8f45f6895ba53fac3527a4
+      created: 1776026798779
+      modified: 1779158663089
+      sortKey: -1776026798779
+      description: ""
+    children:
+      - url: localhost/ds2mf/horario/Inserir
+        name: Inserir
+        meta:
+          id: req_46e4305313b548df9851152a53007c70
+          created: 1776026814363
+          modified: 1779157151557
+          isPrivate: false
+          description: ""
+          sortKey: -1776026814363
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"descricao": "3213",
+            	"horaInicial": "18:00",
+            	"horaFinal": "22:00"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/horario/Consultar
+        name: Consultar
+        meta:
+          id: req_9b6a6524c8b046909e652c34d3eb6e83
+          created: 1776027055798
+          modified: 1776028468225
+          isPrivate: false
+          description: ""
+          sortKey: -1776027055798
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "",
+            	"descricao": "",
+            	"horaInicial": "",
+            	"horaFinal": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/horario/Alterar
+        name: Alterar
+        meta:
+          id: req_43c8d83f82c04ff885f3f602fda82cee
+          created: 1776027084398
+          modified: 1776027918246
+          isPrivate: false
+          description: ""
+          sortKey: -1776027084398
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "1",
+            	"descricao": "",
+            	"horaInicial": "08:99",
+            	"horaFinal": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/horario/Desativar
+        name: Desativar
+        meta:
+          id: req_e995db95aa8b4b50ae8bee26b3684687
+          created: 1776027106625
+          modified: 1776028559149
+          isPrivate: false
+          description: ""
+          sortKey: -1776027106625
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "3"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Turma
+    meta:
+      id: fld_a6aa6f9d3429409d9296bc2d394a5502
+      created: 1779141592950
+      modified: 1779158658613
+      sortKey: -1779141592950
+      description: ""
+    children:
+      - url: localhost/ds2mf/turma/inserir
+        name: Inserir
+        meta:
+          id: req_255a5162cca04d38b5150993e8460ac7
+          created: 1779141602701
+          modified: 1779142464907
+          isPrivate: false
+          description: ""
+          sortKey: -1779141602701
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"descricao": "111111",
+            	"capacidade": "23",
+            	"dataInicio": "2021-03-01"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/turma/consultar
+        name: Consultar
+        meta:
+          id: req_78abe13a27f447e68ec97dfab2d05a78
+          created: 1779141804751
+          modified: 1779144591524
+          isPrivate: false
+          description: ""
+          sortKey: -1779141804751
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "",
+            	"descricao": "",
+            	"capacidade": "",
+            	"dataInicio": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/turma/alterar
+        name: Alterar
+        meta:
+          id: req_6cfa78b0dc084639bc5837089d752f4f
+          created: 1779144535496
+          modified: 1779145000207
+          isPrivate: false
+          description: ""
+          sortKey: -1779144535496
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "2",
+            	"descricao": "",
+            	"capacidade": "",
+            	"dataInicio": "2028-01-12"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/turma/desativar
+        name: Desativar
+        meta:
+          id: req_a8219e27c70c45ceab4a17794ca8b03d
+          created: 1779145009599
+          modified: 1779145489394
+          isPrivate: false
+          description: ""
+          sortKey: -1779145009599
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Professor
+    meta:
+      id: fld_389e9a62dee5436b97e3244f65f0bad4
+      created: 1779155856508
+      modified: 1779155856508
+      sortKey: -1779155856508
+      description: ""
+    children:
+      - url: localhost/ds2mf/professor/inserir
+        name: Inserir
+        meta:
+          id: req_180669f984be49da9706689f32a1ff84
+          created: 1779155859138
+          modified: 1779156712927
+          isPrivate: false
+          description: ""
+          sortKey: -1779155859138
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "Matheus",
+            	"cpf":"49225338856",
+            	"tipo":"A"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/professor/consultar
+        name: Consultar
+        meta:
+          id: req_4ae3b35e061e4dd586b8d9a9d4bd44af
+          created: 1779155896134
+          modified: 1779156792213
+          isPrivate: false
+          description: ""
+          sortKey: -1779155896134
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo":"",
+            	"nome": "",
+            	"cpf":"",
+            	"tipo":""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/professor/alterar
+        name: Alterar
+        meta:
+          id: req_bebe518d4a564d2f9f77128dce3cf878
+          created: 1779155911596
+          modified: 1779156840420
+          isPrivate: false
+          description: ""
+          sortKey: -1779155911596
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo":"2",
+            	"nome": "",
+            	"cpf":"",
+            	"tipo":"B"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/professor/desativar
+        name: Desativar
+        meta:
+          id: req_ce82a542a736451e8f6634de5958a33d
+          created: 1779155935838
+          modified: 1779156856644
+          isPrivate: false
+          description: ""
+          sortKey: -1779155935838
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo":"2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Mapa
+    meta:
+      id: fld_5364f0a002e4444da140472cf706a274
+      created: 1779156884801
+      modified: 1779156884801
+      sortKey: -1779156884801
+      description: ""
+    children:
+      - url: localhost/ds2mf/mapa/inserir
+        name: Inserir
+        meta:
+          id: req_20c198bd49e3479fb82bd7b6b86d1c3f
+          created: 1779156888136
+          modified: 1779157243615
+          isPrivate: false
+          description: ""
+          sortKey: -1779156888136
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"dataReserva": "2026-05-17",
+            	"codSala": "1",
+            	"codHorario": "4",
+            	"codTurma": "3",
+            	"codProfessor": "2"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/mapa/consultar
+        name: Consultar
+        meta:
+          id: req_9c22c2fa34c64b508a4641924fabeda3
+          created: 1779156928448
+          modified: 1779158569538
+          isPrivate: false
+          description: ""
+          sortKey: -1779156928448
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "sa",
+            	"dataReserva": "sad",
+            	"codSala": "dsa",
+            	"codHorario": "asda",
+            	"codTurma": "",
+            	"codProfessor": "21"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/mapa/alterar
+        name: Alterar
+        meta:
+          id: req_dfb33a8c1f804a759938079342e7a4fe
+          created: 1779156946439
+          modified: 1779158629256
+          isPrivate: false
+          description: ""
+          sortKey: -1779156946439
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "1",
+            	"dataReserva": "2012-1-segunda",
+            	"codSala": "ser",
+            	"codHorario": "asd",
+            	"codTurma": "sad",
+            	"codProfessor": "ewq"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/mapa/desativar
+        name: Desativar
+        meta:
+          id: req_9a08a3993db549f98a81f694b743aaf7
+          created: 1779156962676
+          modified: 1779164560047
+          isPrivate: false
+          description: ""
+          sortKey: -1779156962676
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"codigo": "1"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Usuario
+    meta:
+      id: fld_75dac6edeacf4d60a0727f9a0f1ecbba
+      created: 1779162695511
+      modified: 1779162695511
+      sortKey: -1779162695511
+      description: ""
+    children:
+      - url: localhost/ds2mf/usuario/inserir
+        name: Inserir
+        meta:
+          id: req_d2091369e40e400cabb2c6881dd273b5
+          created: 1779162706930
+          modified: 1779163177964
+          isPrivate: false
+          description: ""
+          sortKey: -1779162706930
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "",
+            	"email": "",
+            	"usuario": "",
+            	"senha": ""
+
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/usuario/consultar
+        name: Consulta
+        meta:
+          id: req_c25d7b9f474a422da90290474b2bc58e
+          created: 1779163181423
+          modified: 1779163810587
+          isPrivate: false
+          description: ""
+          sortKey: -1779163181423
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "",
+            	"email": "",
+            	"usuario": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/usuario/alterar
+        name: Alterar
+        meta:
+          id: req_811c6bcf54724b7a93fbde0d2c7b8bb9
+          created: 1779163723668
+          modified: 1779163883728
+          isPrivate: false
+          description: ""
+          sortKey: -1779163723668
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"idUsuario": "1",
+            	"nome": "",
+            	"email": "asd@gmail.com",
+            	"senha": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost/ds2mf/usuario/desativar
+        name: New Request
+        meta:
+          id: req_bed018529808466aa2e35453c9de6d4c
+          created: 1779164359805
+          modified: 1779164533362
+          isPrivate: false
+          description: ""
+          sortKey: -1779164359805
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"idUsuario": "1"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_6e38a2d5ff10098d072c8218a95b51705f98ae71
+    created: 1776012284279
+    modified: 1776012284279
+environments:
+  name: Base Environment
+  meta:
+    id: env_6e38a2d5ff10098d072c8218a95b51705f98ae71
+    created: 1776012284278
+    modified: 1776012284278
+    isPrivate: false
